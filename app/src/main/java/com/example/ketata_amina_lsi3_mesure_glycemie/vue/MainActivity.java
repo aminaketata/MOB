@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Calculer();
+                Calculer(view);
             }
         });
     }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         tvRésultat=(TextView) findViewById(R.id.tvRésultat);
         bConsulter=(Button) findViewById(R.id.btnConsulter);
     }
-    private void Calculer()
+    private void Calculer(View v)
     {
         int age;
         float valeurMesurer;
