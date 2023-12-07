@@ -90,13 +90,4 @@
         android:textSize="25sp"
         android:background="@color/blue2"/>
 
-    <TextView
-        android:id="@+id/tvRésultat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="24sp"
-        android:text="..." />
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.example.ketata_amina_lsi3_mesure_glycemie.vue.view.vue;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,9 +18,11 @@ import com.example.ketata_amina_lsi3_mesure_glycemie.R;
 import com.example.ketata_amina_lsi3_mesure_glycemie.vue.view.controller.Controller;
 public class MainActivity extends AppCompatActivity
 {
+    private final int REQUEST_CODE=1;
     private EditText etValeur;
     private Button bConsulter;
-    private TextView tvAge,tvRésultat;
+    private TextView tvAge;
+    //private TextView tvRésultat ;
     private RadioButton rbOui,rbNon;
     private SeekBar sbAge;
     private Controller controller=Controller.getInstance();
@@ -72,11 +76,23 @@ public class MainActivity extends AppCompatActivity
                     //userAction:view---->Controller
                     controller.createPatient(age,valeurMesurer,fasting);
                     //Update Controller----->View
-                    tvRésultat.setText(controller.getResult());
+                    //tvRésultat.setText(controller.getResult());
+                    Intent intent=new Intent(MainActivity.this,ConsultActivity.class);
+                    intent.putExtra("reponse",controller.getResult());
+                    startActivityForResult(intent,REQUEST_CODE);
                 }
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==REQUEST_CODE)
+            if (resultCode==RESULT_CANCELED)
+                Toast.makeText(MainActivity.this,"Erreur:resultat est null",Toast.LENGTH_SHORT).show();
+    }
+
     private void init()
     {
         etValeur=(EditText) findViewById(R.id.etValeur);
@@ -84,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         tvAge=(TextView) findViewById(R.id.tvAge);
         rbOui=(RadioButton) findViewById(R.id.rbtOui);
         rbNon=(RadioButton) findViewById(R.id.rbtNon);
-        tvRésultat=(TextView) findViewById(R.id.tvRésultat);
+        //tvRésultat=(TextView) findViewById(R.id.tvRésultat);
         bConsulter=(Button) findViewById(R.id.btnConsulter);
     }
 
