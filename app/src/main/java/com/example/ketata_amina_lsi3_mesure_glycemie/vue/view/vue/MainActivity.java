@@ -2,7 +2,6 @@ package com.example.ketata_amina_lsi3_mesure_glycemie.vue.view.vue;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +12,9 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.ketata_amina_lsi3_mesure_glycemie.R;
 import com.example.ketata_amina_lsi3_mesure_glycemie.vue.view.controller.Controller;
+
 public class MainActivity extends AppCompatActivity
 {
     private final int REQUEST_CODE=1;
@@ -44,19 +43,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onStartTrackingTouch(SeekBar seekBar)
             {
-
+                // Action à effectuer lorsque l'utilisateur commence à déplacer la barre de progression
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar)
             {
-
+                // Action à effectuer lorsque l'utilisateur arrête de déplacer la barre de progression
             }
         });
+        // Ajouter un écouteur de clic pour le bouton "Consulter"
         bConsulter.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+                // Récupérer les valeurs entrées par l'utilisateur
                 int age;
                 float valeurMesurer;
                 boolean verifAge=false,verifValeur=false;
@@ -68,15 +69,18 @@ public class MainActivity extends AppCompatActivity
                     verifValeur=true;
                 else
                     Toast.makeText(MainActivity.this, "veillez verifier la valeur mesurer", Toast.LENGTH_LONG).show();
+                // Si les deux vérifications sont réussies, procéder à la création du patient
                 if (verifAge && verifValeur)
                 {
                     age = sbAge.getProgress();
                     valeurMesurer = Float.valueOf(etValeur.getText().toString());
                     boolean fasting = rbOui.isChecked();
                     //userAction:view---->Controller
+                    // Appeler le contrôleur pour créer le patient
                     controller.createPatient(age,valeurMesurer,fasting);
                     //Update Controller----->View
                     //tvRésultat.setText(controller.getResult());
+                    // Lancer une nouvelle activité pour afficher les résultats
                     Intent intent=new Intent(MainActivity.this,ConsultActivity.class);
                     intent.putExtra("reponse",controller.getResult());
                     startActivityForResult(intent,REQUEST_CODE);
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             if (resultCode==RESULT_CANCELED)
                 Toast.makeText(MainActivity.this,"Erreur:resultat est null",Toast.LENGTH_SHORT).show();
     }
-
+    // Méthode pour initialiser les composants de l'interface utilisateur
     private void init()
     {
         etValeur=(EditText) findViewById(R.id.etValeur);
@@ -103,6 +107,5 @@ public class MainActivity extends AppCompatActivity
         //tvRésultat=(TextView) findViewById(R.id.tvRésultat);
         bConsulter=(Button) findViewById(R.id.btnConsulter);
     }
-
 }
 

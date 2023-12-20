@@ -7,7 +7,8 @@
     android:background="@drawable/home_background"
     tools:context=".vue.view.vue.HomeActivity">
 
-    <EditText android:id="@+id/etUserName"
+    <EditText
+        android:id="@+id/etUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -19,7 +20,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"/>
 
-    <EditText android:id="@+id/etPassword"
+    <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/etUserName"
